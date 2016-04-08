@@ -134,8 +134,11 @@ class Reader(Analyzer):
                 muons[mu]=mu
         if  hasattr(self.cfg_ana, 'muonsToITags') and hasattr(self.cfg_ana, 'muonITags'):
             for mu in store.get(self.cfg_ana.muonsToITags):
+                #import pdb; pdb.set_trace()
                 muons[Particle(mu.Particle())].iso.sumpt = muons[Particle(mu.Particle())].pt()*mu.Tag().Value()
-
+                
+        for m in event.muons:
+            print m, 'iso', m.iso.sumpt
 
 
         if hasattr(self.cfg_ana, 'photons'):
