@@ -99,12 +99,11 @@ class ImpactParameter(Analyzer):
                 self.ratio_IPs.Divide(self.num_IPs_hist,self.denom_IPs_hist)
 
 
-    def ll_tag(self, ratio_histo, ptc_var, jet_tag ):
+    def ll_tag(self, ratio_histo, ptc_var):
         ibin = ratio_histo.FindBin(ptc_var)
         lhratio = ratio_histo.GetBinContent(ibin)
         if not lhratio == 0:
             LLratio = math.log(lhratio)
-            jet_tag += LLratio
         if lhratio == 0:
             LLratio = 0
         return LLratio
@@ -152,9 +151,11 @@ class ImpactParameter(Analyzer):
                         ipsig_ptcs.append([ptc.path.IP_signif, ptc])
                         
                         if self.tag_IP_b_LL:
-                            ptc.path.IP_b_LL = self.ll_tag(self.ratio_IP, ptc.path.IP,IP_b_LL )
+                            ptc.path.IP_b_LL = self.ll_tag(self.ratio_IP, ptc.path.IP)
+                            IP_b_LL += ptc.path.IP_b_LL
                         if self.tag_IPs_b_LL:
-                            ptc.path.IPs_b_LL = self.ll_tag(self.ratio_IPs, ptc.path.IP_signif, IPs_b_LL )
+                            ptc.path.IPs_b_LL = self.ll_tag(self.ratio_IPs, ptc.path.IP_signif)
+                            IPs_b_LL += ptc.path.IPs_b_LL
                             
             ipsig_ptcs.sort(reverse=True)
             
