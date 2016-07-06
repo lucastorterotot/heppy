@@ -162,7 +162,7 @@ class Helix(Path):
         else :        
             phi_t_scat = self.phi( scat_point.X(), scat_point.Y())
             t_scat = self.time_at_phi(phi_t_scat)
-            fly_distance = self.speed * 1.0 * t_scat
+            fly_distance = self.speed * 1.0 * (t_scat - self.closest_t)
             # for the IP significance : estimation 
             sigma_IP_due_scattering = fly_distance*math.tan((2)**0.5*theta_0)
             sigma_IP_tot = ( sigma_IP_due_IP_algo_precise**2 + sigma_IP_due_scattering**2 + sigma_IP_due_other**2 )**0.5

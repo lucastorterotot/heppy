@@ -30,20 +30,25 @@ def bookParticle( tree, pName ):
     var(tree, '{pName}_pdgid'.format(pName=pName))
     var(tree, '{pName}_ip'.format(pName=pName))
     var(tree, '{pName}_ip_signif'.format(pName=pName))
+    var(tree, '{pName}_theta_0'.format(pName=pName))
     bookP4(tree, pName)
     
 def fillParticle( tree, pName, particle ):
     fill(tree, '{pName}_pdgid'.format(pName=pName), particle.pdgid() )
     ip = -99
     ip_signif = -1e9
+    theta_0 = -99
     if hasattr(particle, 'path'):
         path = particle.path
         if hasattr(path, 'IP'):
             ip = path.IP
         if hasattr(path, 'IP_signif'):
             ip_signif = path.IP_signif
+        if hasattr(path, 'theta_0'):
+            theta_0 = path.theta_0
     fill(tree, '{pName}_ip'.format(pName=pName), ip )
     fill(tree, '{pName}_ip_signif'.format(pName=pName), ip_signif )
+    fill(tree, '{pName}_theta_0'.format(pName=pName), theta_0 )
     fillP4(tree, pName, particle )
 
 
