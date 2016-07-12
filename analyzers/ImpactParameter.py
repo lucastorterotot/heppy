@@ -53,7 +53,6 @@ class ImpactParameter(Analyzer):
     computeip = cfg.Analyzer(
                         ImpactParameter,
                         jets = 'jets',
-                        output = 'computeip',
                         num_IP = ("histo_stat_IP_ratio_bems.root","h_b"),
                         denom_IP = ("histo_stat_IP_ratio_bems.root","h_u"),
                         num_IPs = ("histo_stat_IPs_ratio_bems.root","h_b"),

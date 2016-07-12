@@ -144,7 +144,7 @@ class BeamPipe(DetectorElement):
     def __init__(self):
         #Material Seamless AISI 316 LN, External diameter 53 mm, Wall thickness 1.5 mm (out of cms) X0 1.72 cm
         #in CMS, radius 25 mm (?), tchikness 8mm, X0 35.28 cm : berylluim
-        factor = 1.0
+        factor = 1
         volume = VolumeCylinder('beampipe', 2.5e-2*factor+0.8e-3, 1.98, 2.5e-2*factor, 1.9785 )
         mat = material.Material('BeamPipe', 35.28e-2, 0)
         super(BeamPipe, self).__init__('beampipe', volume, mat)
