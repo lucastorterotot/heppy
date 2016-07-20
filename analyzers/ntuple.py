@@ -25,7 +25,7 @@ def fillP4( tree, pName, p4 ):
     fill(tree, '{pName}_m'.format(pName=pName), p4.m() )
 
 # simple particle
-ptc_tags = ["pdgid", "ip", "ip_signif", "theta_0", "ip_xy", "ip_z" ]
+ptc_tags = ["pdgid", "ip", "ip_signif", "theta_0", "ip_xy", "ip_z", "sigma_pos", "sigma_dev" ]
 
 def bookParticle( tree, pName ):
     for tag in ptc_tags:
@@ -40,12 +40,16 @@ def fillParticle( tree, pName, particle ):
     theta_0 = -99
     ip_xy = -99
     ip_z = -99
+    sigma_pos = -99
+    sigma_dev = -99
     if hasattr(particle, 'path'):
         path = particle.path
         if hasattr(path, 'IP'):
             ip = path.IP
         if hasattr(path, 'IP_signif'):
             ip_signif = path.IP_signif
+            sigma_dev = path.IP_sigma_dev
+            sigma_pos = path.IP_sigma_pos
         if hasattr(path, 'theta_0'):
             theta_0 = path.theta_0
         if hasattr(path, 'IPcoord'):
@@ -56,6 +60,8 @@ def fillParticle( tree, pName, particle ):
     fill(tree, '{pName}_theta_0'.format(pName=pName), theta_0 )
     fill(tree, '{pName}_ip_xy'.format(pName=pName), ip_xy )
     fill(tree, '{pName}_ip_z'.format(pName=pName), ip_z )
+    fill(tree, '{pName}_sigma_dev'.format(pName=pName), sigma_dev )
+    fill(tree, '{pName}_sigma_pos'.format(pName=pName), sigma_pos )
     fillP4(tree, pName, particle )
 
 
